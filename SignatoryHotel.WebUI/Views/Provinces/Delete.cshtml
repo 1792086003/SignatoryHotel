@@ -1,0 +1,58 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Province
+
+@{
+    //ViewBag.Title = "Delete";
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Delete</h2>
+
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+<h3>@Resource.AreYouSureYouWantToDeleteThis?</h3>
+<div>
+    <h4>@Resource.Province</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*Html.DisplayNameFor(model => model.ProvinceName)*@
+            @Resource.ProvinceName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProvinceName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete","Provinces",FormMethod.Post, new { @id = "delete-form" })) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resource.Delete class="btn btn-default" data-toggle="modal" data-target="#DeleteConfirmModal" /> |
+            @Html.ActionLink(Resource.BackToList, "Index")
+        </div>
+    }
+</div>
+<div class="modal fade" id="DeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;" />
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">@Resource.DeleteConfirmation</h4>
+        </div>
+        <div class="modal-body">
+            @Resource.ThisActionWillDeleteAllCitiesAndHotelsBelongToThisProvince?
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" type="button" class="btn btn-default">@Resource.Cancel</button>
+            <button id="btnConfirm" type="button" class="btn btn-primary" onclick="$('#delete-form').submit()">@Resource.Delete</button>
+        </div>'
+    </div>
+</div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToDelete.</h4>
+}

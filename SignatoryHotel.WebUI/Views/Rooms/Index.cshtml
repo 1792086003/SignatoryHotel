@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Lanxess.CN.SignatoryHotel.BussinessEntity.Room>
+
+@{
+    //ViewBag.Title = "Index";
+    ViewBag.Title = Resource.Index;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+    if (string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }
+    else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Rooms</h2>
+
+<p>
+@if ((bool)(Session["SignatoryHotelIsAdmin"])) {
+    @Html.ActionLink(Resource.Create, "Create", new { HotelID = HotelID }, new { @class = "pull-right", target="_blank"})
+}
+</p>
+<table class="table">
+    <tr>
+@if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "EN-US")
+{
+    <th>
+        @*@Html.DisplayNameFor(model => model.Hotel.Name)*@
+        @Resource.HotelName
+    </th>
+}
+        
+@if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "ZH-CN")
+{
+    <th>
+        @Resource.HotelCNName
+    </th>
+}  
+        <th>
+            @*@Html.DisplayNameFor(model => model.Classification)*@
+            @Resource.Classification
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Price)*@
+            @Html.ActionLink(Resource.Price, "Index", new { HotelID = HotelID,sortOrder = ViewBag.sortByPrice })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Remark)*@
+            @Resource.Remark
+        </th>
+        <th></th>
+        @if ((bool)(Session["SignatoryHotelIsAdmin"]))
+        {
+            <th>@Resource.Admin</th>
+        }
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+@if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "EN-US")
+{
+    <td>
+        @Html.DisplayFor(modelItem => item.Hotel.Name)
+    </td>
+}
+      @if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "ZH-CN")
+      {
+        <td>
+            @Html.DisplayFor(modelItem => item.Hotel.CNName)
+        </td>
+      }
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Classification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            <div style="word-wrap:break-word">
+                @*@Html.DisplayFor(modelItem => item.Remark, new { @maxlength = "20" })*@
+                @Html.Raw(Html.Encode(item.Remark).Replace("\n", "<br/>"))
+            </div>
+        </td>
+        <td>
+            @Html.ActionLink(Resource.Details, "Details", new { id=item.RoomID,HotelID=HotelID }, new { target = "_blank" }) 
+        </td>
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <td>
+        @Html.ActionLink(Resource.Edit, "Edit", new { id = item.RoomID, HotelID = HotelID },new { target = "_blank" }) |
+        @Html.ActionLink(Resource.Delete, "Delete", new { id = item.RoomID, HotelID = HotelID }, new { target = "_blank" })
+    </td>
+}
+    </tr>
+}
+
+</table>

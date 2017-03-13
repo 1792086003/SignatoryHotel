@@ -1,0 +1,31 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Province
+
+@{
+    //ViewBag.Title = "Details";
+    ViewBag.Title = Resource.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Details</h2>
+
+<div>
+    <h4>@Resource.Province</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*Html.DisplayNameFor(model => model.ProvinceName)*@
+            @Resource.ProvinceName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProvinceName)
+        </dd>
+
+    </dl>
+</div>
+ 
+<p>
+    @if ((bool)(Session["SignatoryHotelIsAdmin"])){@Html.ActionLink(Resource.Edit, "Edit", new { id = Model.ProvinceID })} |
+    @Html.ActionLink(Resource.BackToList, "Index")
+</p>
+

@@ -1,0 +1,50 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.City
+
+@{
+    //ViewBag.Title = "Delete";
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Delete</h2>
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+<h3>@Resource.AreYouSureYouWantToDeleteThis?</h3>
+<div>
+    <h4>@Resource.City</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*Html.DisplayNameFor(model => model.Province.ProvinceName)*@
+            @Resource.Province
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Province.ProvinceName)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.CityName)*@
+            @Resource.City
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resource.Delete class="btn btn-default" /> |
+            @Html.ActionLink(Resource.BackToList, "Index")
+        </div>
+    }
+</div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToDelete.</h4>
+}

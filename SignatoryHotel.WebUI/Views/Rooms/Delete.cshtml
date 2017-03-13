@@ -1,0 +1,92 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Room
+
+@{
+    //ViewBag.Title = "Delete";
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+    if (string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }
+    else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Delete</h2>
+
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+<h3>@Resource.AreYouSureYouWantToDeleteThis?</h3>
+<div>
+    <h4>@Resource.Rooms</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       @if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "EN-US")
+       {
+        <dt>
+            @*Html.DisplayNameFor(model => model.Hotel.Name)*@
+            @Resource.Hotel
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Name)
+        </dd>
+       }
+        @if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "ZH-CN")
+        {
+            <dt>
+                @*Html.DisplayNameFor(model => model.Hotel.Name)*@
+                @Resource.Hotel
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Hotel.CNName)
+            </dd>
+        }
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Classification)*@
+            @Resource.Classification
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Classification)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Price)*@
+            @Resource.Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Remark)*@
+            @Resource.Remark
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resource.Delete class="btn btn-default" /> |
+            @Html.ActionLink(Resource.BackToList, "Index",new { id=Model.RoomID,HotelID=HotelID})
+        </div>
+    }
+</div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToDelete.</h4>
+}

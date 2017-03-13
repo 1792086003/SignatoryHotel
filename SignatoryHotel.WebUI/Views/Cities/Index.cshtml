@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Lanxess.CN.SignatoryHotel.BussinessEntity.City>
+
+@{
+    //ViewBag.Title = "Index";
+    ViewBag.Title = Resource.Index;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.City</h2>
+
+@using (Html.BeginForm("Index","Cities", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="ProvinceID">@Resource.Province</label>
+                @Html.DropDownList("ProvinceID", ViewData["Province"] as IEnumerable<SelectListItem>, "--Select--", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label></label>
+                <div class="input-group-btn"><button type="submit" class="btn btn-primary">@Resource.Filter</button></div>
+            </div>
+        </div>
+    </div>
+}
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+<p>
+    @Html.ActionLink(Resource.Create, "Create",new {ProvinceID=ViewBag.Province }, new { @class = "pull-right",target="_blank"})
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @*Html.DisplayNameFor(model => model.Province.ProvinceName)*@
+            @Resource.Province
+        </th>
+        <th>
+            @*Html.DisplayNameFor(model => model.CityName)*@
+            @Resource.City
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Province.ProvinceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityName)
+        </td>
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+        <td>
+            @Html.ActionLink(Resource.Edit, "Edit", new { id = item.CityID }, new { target = "_blank" }) |
+            @Html.ActionLink(Resource.Details, "Details", new { id = item.CityID }, new { target = "_blank" }) |
+            @Html.ActionLink(Resource.Delete, "Delete", new { id = item.CityID }, new { target = "_blank" })
+        </td>
+}
+    </tr>
+}
+
+</table>

@@ -1,0 +1,79 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Room
+
+@{
+    //ViewBag.Title = "Details";
+    ViewBag.Title = Resource.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+    if(string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Details</h2>
+
+<div>
+    <h4>@Resource.Rooms</h4>
+    <hr />
+    <dl class="dl-horizontal">
+@if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "EN-US")
+{
+    <dt>
+        @*Html.DisplayNameFor(model => model.Hotel.Name)*@
+        @Resource.HotelName
+    </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Name)
+        </dd>
+}
+        @if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "ZH-CN")
+        {
+            <dt>
+                @*Html.DisplayNameFor(model => model.Hotel.Name)*@
+                @Resource.HotelName
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Hotel.CNName)
+            </dd>
+        }
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Classification)*@
+            @Resource.Classification
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Classification)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Price)*@
+            @Resource.Price
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Remark)*@
+            @Resource.Remark
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model=> model.Remark)*@
+            @Html.Raw(Html.Encode(Model.Remark).Replace("\n", "<br/>"))
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if ((bool)(Session["SignatoryHotelIsAdmin"])) {@Html.ActionLink(Resource.Edit, "Edit", new { id = Model.RoomID, HotelID = HotelID })} |
+    @Html.ActionLink(Resource.BackToList, "Index", new { id=Model.RoomID,HotelID = HotelID })
+</p>

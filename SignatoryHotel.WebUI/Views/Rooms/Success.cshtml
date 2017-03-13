@@ -1,0 +1,23 @@
+﻿
+@{
+    //ViewBag.Title = "Success";
+    ViewBag.Title = Resource.Success;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+
+    if (string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }
+    else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Congratulation</h2>
+
+<h4>@Resource.You <span class="label label-warning">@Request.QueryString["actionName"]</span> @Resource.Rooms @Resource.Classification <span class="label label-success"> @Request.QueryString["roomClassification"] </span>  @Resource.Successful</h4>
+
+@Html.ActionLink(Resource.BackToList, "Index", new { HotelID = HotelID })
+

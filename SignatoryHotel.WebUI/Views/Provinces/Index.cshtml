@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Lanxess.CN.SignatoryHotel.BussinessEntity.Province>
+
+@{
+    //ViewBag.Title = "Index";
+    ViewBag.Title = Resource.Index;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Province</h2>
+
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <p>
+        @Html.ActionLink(Resource.Create, "Create",null, new { target="_blank"})
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @*Html.DisplayNameFor(model => model.ProvinceName)*@
+            @Resource.ProvinceName
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProvinceName)
+        </td>
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{ 
+        <td>
+            @Html.ActionLink(Resource.Edit, "Edit", new { id=item.ProvinceID }, new { target = "_blank" }) |
+            @Html.ActionLink(Resource.Details, "Details", new { id=item.ProvinceID }, new { target = "_blank" }) |
+            @Html.ActionLink(Resource.Delete, "Delete", new { id=item.ProvinceID }, new { target = "_blank" })
+        </td>
+}
+    </tr>
+}
+
+</table>

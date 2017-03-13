@@ -1,0 +1,164 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Hotel
+
+@{
+    ViewBag.Title = Resource.Delete;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Delete</h2>
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{ 
+<h3>@Resource.AreYouSureYouWantToDeleteThis?</h3>
+<div>
+    <h4>@Resource.Hotel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.City.CityName)*@
+            @Resource.City
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Province.ProvinceName)*@
+            @Resource.Province
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Province.ProvinceName)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Name)*@
+            @Resource.HotelName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.CNName)*@
+            @Resource.HotelCNName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNName)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Star)*@
+            @Resource.Star
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Star)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Address)*@
+            @Resource.Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.AddressCN)*@
+            @Resource.AddressCN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressCN)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Zip)*@
+            @Resource.Zip
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Telephone1)*@
+            @Resource.Telephone
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone1)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Telephone2)*@
+            @Resource.Telephone
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone2)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Fax1)*@
+            @Resource.Fax
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax1)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Fax2)*@
+            @Resource.Fax
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax2)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Email)*@
+            @Resource.Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete","Hotels", new { CityID = Request.QueryString["CityID"] },FormMethod.Post,new { @id = "delete-form" })) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value=@Resource.Delete class="btn btn-default" data-toggle="modal" data-target="#DeleteConfirmModal"/> |
+            @Html.ActionLink(Resource.BackToList, "Index", new { CityID = Request.QueryString["CityID"], currentFilter = Request.QueryString["currentFilter"] })
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="DeleteConfirmModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">@Resource.DeleteConfirmation</h4>
+            </div>
+            <div class="modal-body">
+                @Resource.ThisActionWillDeleteAllRoomsAndContractsBelongToThisHotel?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">@Resource.Cancel</button>
+                <button id="btnConfirm" type="button" class="btn btn-primary" onclick="$('#delete-form').submit()">@Resource.Delete</button>
+            </div>'
+        </div>
+    </div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToDelete.</h4>
+}

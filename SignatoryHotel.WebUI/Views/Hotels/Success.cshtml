@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = Resource.Success;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>@Resource.Congratulation</h2>
+
+<h4>@Resource.You <span class="label label-warning">@Request.QueryString["actionName"]</span> @Resource.Hotel <span class="label label-success"> @Request.QueryString["hotelName"] </span>  successfully</h4>
+
+@Html.ActionLink(Resource.BackToList, "Index", new { CityID = Request.QueryString["CityID"], currentFilter = Request.QueryString["currentFilter"] })
+

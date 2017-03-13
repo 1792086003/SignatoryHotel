@@ -1,0 +1,49 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Province
+
+@{
+    //ViewBag.Title = "Edit";
+    ViewBag.Title = Resource.Edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resource.Edit</h2>
+
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Resource.Province</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProvinceID)
+
+        <div class="form-group">
+            @Html.Label(Resource.ProvinceName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProvinceName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProvinceName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=@Resource.Save class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(Resource.BackToList, "Index")
+</div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToEdit.</h4>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

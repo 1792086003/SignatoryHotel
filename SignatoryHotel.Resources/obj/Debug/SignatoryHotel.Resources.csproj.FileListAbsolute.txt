@@ -1,0 +1,10 @@
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\bin\Debug\SignatoryHotel.Resources.dll
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\bin\Debug\SignatoryHotel.Resources.pdb
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\bin\Debug\zh\SignatoryHotel.Resources.resources.dll
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\SignatoryHotel.Resources.csproj.GenerateResource.Cache
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\zh\SignatoryHotel.Resources.resources.dll
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\SignatoryHotel.Resources.dll
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\SignatoryHotel.Resources.pdb
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\Lanxess.CN.SignatoryHotel.Resources.Resource.resources
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\Lanxess.CN.SignatoryHotel.Resources.Resource.zh.resources
+C:\Users\lxrcn\Documents\Visual Studio 2015\Projects\SignatoryHotel\SignatoryHotel.Resources\obj\Debug\SignatoryHotel.Resources.csprojResolveAssemblyReference.cache

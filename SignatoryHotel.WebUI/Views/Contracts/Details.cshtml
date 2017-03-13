@@ -1,0 +1,100 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Contract
+
+@{
+    //ViewBag.Title = "Details";
+    ViewBag.Title = Resource.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+    if (string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }
+    else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Details</h2>
+
+<div>
+    <h4>@Resource.Contracts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*Html.DisplayNameFor(model => model.Hotel.Name)*@
+            @Resource.Hotel
+        </dt>
+@if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "EN-US")
+{
+    <dd>
+        @Html.DisplayFor(model => model.Hotel.Name)
+    </dd>
+}
+       @if (Session["SignatoryHotelLanguage"].ToString().ToUpper() == "ZH-CN")
+       {
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.CNName)
+        </dd>
+       }
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Contacter)*@
+            @Resource.Contacter
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contacter)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Telephone)*@
+            @Resource.Telephone
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Mobile)*@
+            @Resource.Mobile
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Email)*@
+            @Resource.Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.Start)*@
+            @Resource.Start
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @*Html.DisplayNameFor(model => model.End)*@
+            @Resource.End
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if ((bool)(Session["SignatoryHotelIsAdmin"])) {@Html.ActionLink(Resource.Edit, "Edit", new { id = Model.ContractID, HotelID = HotelID })} |
+    @Html.ActionLink(Resource.BackToList, "Index", new { id = Model.ContractID, HotelID = HotelID })
+</p>

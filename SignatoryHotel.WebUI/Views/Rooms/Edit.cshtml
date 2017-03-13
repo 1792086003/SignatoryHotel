@@ -1,0 +1,83 @@
+﻿@model Lanxess.CN.SignatoryHotel.BussinessEntity.Room
+
+@{
+    //ViewBag.Title = "Edit";
+    ViewBag.Title = Resource.Edit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int HotelID;
+    if (string.IsNullOrEmpty(Request.QueryString["HotelID"]))
+    {
+        HotelID = 0;
+    }
+    else
+    {
+        HotelID = int.Parse(Request.QueryString["HotelID"]);
+    }
+}
+
+<h2>@Resource.Edit</h2>
+
+@if ((bool)(Session["SignatoryHotelIsAdmin"]))
+{
+using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Resource.Rooms</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.RoomID)
+
+        <div class="form-group">
+            @Html.Label(Resource.Classification, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Classification, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Classification, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(Resource.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(Resource.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @* @Html.EditorFor(model => model.Remark,new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextAreaFor(model => model.Remark, 10, 50, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HotelID, Resource.Hotel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("HotelID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HotelID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=@Resource.Save class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(Resource.BackToList, "Index",new { id=Model.RoomID,HotelID=HotelID})
+</div>
+}
+@if (!(bool)(Session["SignatoryHotelIsAdmin"]))
+{
+    <h4>@Resource.YouHaveNoRightsToEdit.</h4>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
