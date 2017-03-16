@@ -1,3 +1,3 @@
 # SignatoryHotel
-Drafted from asp.net mvc standard template
-exercise privately
+Drafted from asp.net mvc standard template .
+Privately exercise .
